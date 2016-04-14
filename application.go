@@ -42,6 +42,7 @@ type Application struct {
 	Constraints           *[][]string         `json:"constraints,omitempty"`
 	Container             *Container          `json:"container,omitempty"`
 	CPUs                  float64             `json:"cpus,omitempty"`
+	GPUs                  float64             `json:"gpus,omitempty"`
 	Disk                  *float64            `json:"disk,omitempty"`
 	Env                   *map[string]string  `json:"env,omitempty"`
 	Executor              *string             `json:"executor,omitempty"`
@@ -118,6 +119,13 @@ func (r *Application) Command(cmd string) *Application {
 //		cpu:	the CPU shared (check Docker docs) per instance
 func (r *Application) CPU(cpu float64) *Application {
 	r.CPUs = cpu
+	return r
+}
+
+// GPU set the amount of GPU shares per instance which is assigned to the application
+//		gpu:	the GPU shared (check Docker docs) per instance
+func (r *Application) GPU(gpu float64) *Application {
+	r.GPUs = gpu
 	return r
 }
 
